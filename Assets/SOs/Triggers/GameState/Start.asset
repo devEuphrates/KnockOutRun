@@ -15,8 +15,8 @@ MonoBehaviour:
   OnTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
-        m_TargetAssemblyTypeName: TriggerChannelSO, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+        m_TargetAssemblyTypeName: TriggerChannelSO, Resin.Utils
         m_MethodName: set_Silent
         m_Mode: 6
         m_Arguments:

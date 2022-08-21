@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: e296c3fb39e3d0246b6451ffed644cbf, type: 2}
+  _listened: {fileID: 11400000, guid: 88a133ad701566b4381bfa443d883374, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:
@@ -1735,7 +1735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: b811e7abd9abfcd449d399d7cbc4203d, type: 2}
+  _listened: {fileID: 11400000, guid: e0d45d69e2a883c4b9e15edf1d6adfa0, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:
@@ -2669,8 +2669,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 455422d675b0dbc4b923b77c9e9e471b, type: 2}
-        m_TargetAssemblyTypeName: TriggerChannelSO, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
+        m_TargetAssemblyTypeName: TriggerChannelSO, Resin.Utils
         m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
@@ -4885,7 +4885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: e296c3fb39e3d0246b6451ffed644cbf, type: 2}
+  _listened: {fileID: 11400000, guid: 88a133ad701566b4381bfa443d883374, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:
@@ -4943,7 +4943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: 455422d675b0dbc4b923b77c9e9e471b, type: 2}
+  _listened: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:
@@ -4972,7 +4972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
+  _listened: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:
@@ -5152,7 +5152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88827472ea7bcd42ab016d807938bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiText: {fileID: 0}
+  _uiText: {fileID: 2011668855}
   _prefix: Level
   _floatValue: {fileID: 0}
   _intValue: {fileID: 11400000, guid: 5c08bc678030f0f41b973776c1a11d07, type: 2}

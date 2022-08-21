@@ -1157,9 +1157,9 @@ MonoBehaviour:
   _target: {fileID: 0}
   _minX: -5
   _maxX: 5
-  _start: {fileID: 11400000, guid: 455422d675b0dbc4b923b77c9e9e471b, type: 2}
-  _fail: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
-  _endState: {fileID: 11400000, guid: b811e7abd9abfcd449d399d7cbc4203d, type: 2}
+  _start: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
+  _fail: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+  _phaseTwo: {fileID: 11400000, guid: e0d45d69e2a883c4b9e15edf1d6adfa0, type: 2}
   _endPunch: {fileID: 11400000, guid: c90e5d74645c97b448bcb083d0c77e78, type: 2}
 --- !u!114 &2141769377756617551
 MonoBehaviour:
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   _finishPunch: flying
   _punchTrigger: {fileID: 11400000, guid: 5877621ae980c674dbb581798e776bb5, type: 2}
   _enemyHit: {fileID: 11400000, guid: 37ffaf47cab7a8241b985d909a8ea97c, type: 2}
-  _failTrigger: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
+  _failTrigger: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
   _finishPunchTrigger: {fileID: 11400000, guid: c90e5d74645c97b448bcb083d0c77e78, type: 2}
 --- !u!114 &2191300989115611386
 MonoBehaviour:
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   _maxForce: {fileID: 11400000, guid: c345608a95e2b0c498f1eb524e9d983a, type: 2}
   _forceAdd: {fileID: 11400000, guid: 3e44bcf74f08a854b8391167251f3be3, type: 2}
   _hit: {fileID: 11400000, guid: 37ffaf47cab7a8241b985d909a8ea97c, type: 2}
-  _secondPhase: {fileID: 11400000, guid: b811e7abd9abfcd449d399d7cbc4203d, type: 2}
+  _secondPhase: {fileID: 11400000, guid: e0d45d69e2a883c4b9e15edf1d6adfa0, type: 2}
 --- !u!114 &6881017901452600701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,8 +1301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9ba8a426c7fce4eb52e0c199f94716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fail: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
-  _started: {fileID: 11400000, guid: 455422d675b0dbc4b923b77c9e9e471b, type: 2}
+  _fail: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+  _started: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
   _strength: {fileID: 11400000, guid: ba4ec93c7f0c8f34eb55493e2b187418, type: 2}
   _controller: {fileID: 2141769377756617585}
   _coyoteTime: 0.1
@@ -2722,7 +2722,6 @@ GameObject:
   - component: {fileID: 5375442776115377348}
   - component: {fileID: 1142375631}
   - component: {fileID: 6301251165097704917}
-  - component: {fileID: 5825327541957774064}
   - component: {fileID: 1142375634}
   - component: {fileID: 1485426475}
   m_Layer: 6
@@ -2867,7 +2866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: 455422d675b0dbc4b923b77c9e9e471b, type: 2}
+  _listened: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:
@@ -2896,35 +2895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa52e1c8fcb3d284d88e5f9c7297c35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5825327541957774064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8943218242946801355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: 455422d675b0dbc4b923b77c9e9e471b, type: 2}
-  _listenedEnemy: {fileID: 0}
-  OnTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2141769376612906043}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: start_run
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1142375634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2937,7 +2907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
+  _listened: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:

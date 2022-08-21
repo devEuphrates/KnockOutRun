@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Triggers"), Space]
     [SerializeReference] TriggerChannelSO _start;
     [SerializeReference] TriggerChannelSO _fail;
-    [SerializeReference] TriggerChannelSO _endState;
+    [SerializeReference] TriggerChannelSO _phaseTwo;
     [SerializeReference] TriggerChannelSO _endPunch;
 
 
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         _inputs.OnTouchMove += TouchMove;
 
         _start.AddListener(OnStart);
-        _endState.AddListener(EndPhase);
+        _phaseTwo.AddListener(EndPhase);
         _fail.AddListener(Fail);
         _endPunch.AddListener(FinishPunch);
     }
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         _inputs.OnTouchMove -= TouchMove;
         
         _start.RemoveListener(OnStart);
-        _endState.RemoveListener(EndPhase);
+        _phaseTwo.RemoveListener(EndPhase);
         _fail.RemoveListener(Fail);
         _endPunch.RemoveListener(FinishPunch);
     }
@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
 
     void TouchDown(Vector2 pos)
     {
+        print(pos);
         if (!_controlActive)
             return;
 
@@ -91,7 +92,8 @@ public class PlayerController : MonoBehaviour
 
     void TouchMove(Vector2 pos)
     {
-        if(!_controlActive)
+        print(pos);
+        if (!_controlActive)
             return;
 
         if (Vector2.Distance(pos, _initialTouch) > _maxInputRadius)

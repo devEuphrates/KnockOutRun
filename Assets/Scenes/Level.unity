@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listened: {fileID: 11400000, guid: e296c3fb39e3d0246b6451ffed644cbf, type: 2}
+  _listened: {fileID: 11400000, guid: 88a133ad701566b4381bfa443d883374, type: 2}
   _listenedEnemy: {fileID: 0}
   OnTrigger:
     m_PersistentCalls:
@@ -1295,7 +1295,7 @@ GameObject:
   - component: {fileID: 902902948}
   - component: {fileID: 902902947}
   m_Layer: 0
-  m_Name: Phase 1 Trigger
+  m_Name: Phase 2 Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1331,8 +1331,8 @@ MonoBehaviour:
   OnEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: b811e7abd9abfcd449d399d7cbc4203d, type: 2}
-        m_TargetAssemblyTypeName: TriggerChannelSO, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: e0d45d69e2a883c4b9e15edf1d6adfa0, type: 2}
+        m_TargetAssemblyTypeName: TriggerChannelSO, Resin.Utils
         m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
@@ -3815,6 +3815,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2044589630, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
+      propertyPath: _listened
+      value: 
+      objectReference: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
+    - target: {fileID: 2044589633, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
+      propertyPath: _listened
+      value: 
+      objectReference: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
     - target: {fileID: 2141769377756617548, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -3867,7 +3875,20 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 265317968}
-    m_RemovedComponents: []
+    - target: {fileID: 5375442776115377348, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
+      propertyPath: _trigger3.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+    - target: {fileID: 5375442776115377348, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
+      propertyPath: _trigger3.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Invoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375442776115377348, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
+      propertyPath: _trigger3.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: TriggerChannelSO, Resin.Utils
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2044589629, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 14ed818ff2946b744ad769928d5e2619, type: 3}
 --- !u!4 &2341981266414749351
 Transform:

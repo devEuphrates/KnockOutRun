@@ -1,0 +1,18 @@
+{
+    "name": "Resin.UI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7aa7db7d4a7143d45b3fde2d992c0ef6",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:42313b9b2c6c9994982bf4e2917d1fe2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

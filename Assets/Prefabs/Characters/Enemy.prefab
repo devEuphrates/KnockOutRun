@@ -730,7 +730,7 @@ MonoBehaviour:
       m_Calls: []
   _playerPunch: {fileID: 11400000, guid: 5877621ae980c674dbb581798e776bb5, type: 2}
   _enemyHit: {fileID: 11400000, guid: 37ffaf47cab7a8241b985d909a8ea97c, type: 2}
-  _playerFail: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
+  _playerFail: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
 --- !u!114 &1476494609648207847
 MonoBehaviour:
   m_ObjectHideFlags: 0
