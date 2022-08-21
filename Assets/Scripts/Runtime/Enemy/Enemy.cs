@@ -26,14 +26,11 @@ public class Enemy : MonoBehaviour
 
     bool _finished = false;
 
-    private void Start() => SetStrength(0f);
-
     private void OnEnable()
     {
         _trigger.OnEnter.AddListener(Fight);
         _enemyHit.AddListener(LoseFight);
         _playerFail.AddListener(OnFinish);
-        _playerStrength.OnChange += SetStrength;
     }
 
     private void OnDisable()
@@ -41,10 +38,9 @@ public class Enemy : MonoBehaviour
         _trigger.OnEnter.RemoveListener(Fight);
         _enemyHit.RemoveListener(LoseFight);
         _playerFail.RemoveListener(OnFinish);
-        _playerStrength.OnChange -= SetStrength;
     }
 
-    private void Fight(GameObject _)
+    public void Fight(GameObject _)
     {
         if (_finished)
             return;
@@ -85,7 +81,7 @@ public class Enemy : MonoBehaviour
         _finished = true;
     }
 
-    void SetStrength(float _)
+    public void SetStrength(GameObject _)
     {
         _strength = Mathf.Clamp(_playerStrength.Value + _strengthDifference, 5f, float.MaxValue);
         OnStrengthSet?.Invoke();

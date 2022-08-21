@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
 
     void TouchDown(Vector2 pos)
     {
-        print(pos);
         if (!_controlActive)
             return;
 
@@ -92,7 +91,6 @@ public class PlayerController : MonoBehaviour
 
     void TouchMove(Vector2 pos)
     {
-        print(pos);
         if (!_controlActive)
             return;
 

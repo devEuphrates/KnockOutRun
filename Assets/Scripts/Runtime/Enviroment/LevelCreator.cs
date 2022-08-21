@@ -18,6 +18,7 @@ public class LevelCreator : MonoBehaviour
     [Header("Multipliers"), Space]
     [SerializeReference] Transform _multiplierParent;
     [SerializeReference] GameObject _multiplierPrefab;
+    [SerializeReference] GameObject _multiplierEndPrefab;
     [SerializeField] float _multiplierSize = 1f;
     [SerializeField] float _multiplierMax = 10f;
     [SerializeField] float _multiplierStep = .1f;
@@ -53,7 +54,7 @@ public class LevelCreator : MonoBehaviour
         float curMult = 1f;
         int i = 0;
 
-        while (curMult <= _multiplierMax)
+        while (curMult < _multiplierMax)
         {
             // Instantiate multiplier.
             Multiplier multiplier = Instantiate(_multiplierPrefab, _multiplierParent).GetComponent<Multiplier>();
@@ -65,6 +66,13 @@ public class LevelCreator : MonoBehaviour
 
             curMult += _multiplierStep;
         }
+
+        Multiplier endMultiplier = Instantiate(_multiplierEndPrefab, _multiplierParent).GetComponent<Multiplier>();
+
+        // Set multiplier position.
+        endMultiplier.transform.localPosition += Vector3.forward * _multiplierSize * i;
+
+        endMultiplier.Init(curMult);
     }
 
     void GeneratePremadeLevel(PremadeLevel level)
@@ -92,23 +100,32 @@ public class LevelCreator : MonoBehaviour
 
         float curZ = _startOffset;
 
+        // This iscreated to make sure to not to spawn same set pieces before going through all set pieces.
         var unUsed = new List<SetPieceSO>(usableSetPieces);
 
         for (int i = 0; i < _setPieceCount; i++)
         {
+            // Reset the unused list if we went through all the set pieces.
             if (unUsed.Count == 0)
                 unUsed = usableSetPieces.ToList();
 
+            // Select from un used set pieces.
             var sel = unUsed.GetRandomItem();
 
             var go = Instantiate(sel.Prefab, transform);
 
+            // Remove the spawned set piece from unused since it's recently used.
+            unUsed.Remove(sel);
+
+            // Set the position of set piece to the end of the previous one.
             var pos = Vector3.forward * curZ;
             go.transform.position = pos;
 
+            // Increment current z position with the size of spawned set piece.
             curZ += sel.ZScale;
         }
 
+        // Set the end boss position to the most end.
         _endPiece.position = Vector3.forward * curZ;
 
         _levelGenerated.Invoke();

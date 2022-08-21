@@ -1,5 +1,4 @@
 using Euphrates;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMuscleManager : MonoBehaviour
@@ -14,9 +13,14 @@ public class EnemyMuscleManager : MonoBehaviour
     [SerializeReference] FloatSO _minScale;
     [SerializeReference] FloatSO _maxScale;
 
-    private void Start()
+    private void OnEnable()
     {
-        SetBody();
+        _enemy.OnStrengthSet += SetBody;
+    }
+
+    private void OnDisable()
+    {
+        _enemy.OnStrengthSet -= SetBody;
     }
 
     void SetBody()

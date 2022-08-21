@@ -20,18 +20,20 @@ public class EnemyStrengthIndicator : MonoBehaviour
     void OnEnable()
     {
         _enemy.OnDefeat.AddListener(Defeat);
-        _enemy.OnStrengthSet += SetText;
+        _enemy.OnStrengthSet += Show;
     }
 
     void OnDisable()
     {
         _enemy.OnDefeat.RemoveListener(Defeat);
-        _enemy.OnStrengthSet -= SetText;
+        _enemy.OnStrengthSet -= Show;
     }
-
-    void Start() => SetText();
 
     void Defeat() => Tween.Lerp(1, 0, _duration, (object val) => _cg.alpha = (float)val);
 
-    void SetText() => _text.text = _enemy.Strength.ToString();
+    void Show()
+    {
+        _text.text = _enemy.Strength.ToString();
+        Tween.Lerp(0, 1, _duration, (object val) => _cg.alpha = (float)val);
+    }
 }
