@@ -16,6 +16,9 @@ MonoBehaviour:
   - Level: 1
     LevelPrefab: {fileID: 8358023751450129612, guid: 2363d4a03574ce54a8bc0086ac660682, type: 3}
     ZEnd: 140
+  - Level: 5
+    LevelPrefab: {fileID: 6027547669440998887, guid: 4ed290da4d7c5c942acef90093592918, type: 3}
+    ZEnd: 54.5
   SetPieces:
   - {fileID: 11400000, guid: ec677fad558e8454ba6e950b4067e5cc, type: 2}
   - {fileID: 11400000, guid: eb06784284158424eb51eb182c348204, type: 2}

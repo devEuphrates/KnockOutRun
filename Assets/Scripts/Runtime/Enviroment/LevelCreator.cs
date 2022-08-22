@@ -158,11 +158,11 @@ public class LevelCreator : MonoBehaviour
         totalBeatable = totalBeatable > presetBeatableEnemies.Count ? totalBeatable : presetBeatableEnemies.Count;
 
         // Create int array of size of enemies we can beat.
-        int[] rndNums = new int[totalBeatable];
+        int[] rndNums = new int[totalBeatable - 1];
 
         // Randomly populate the array.
-        for (int i = 0; i < totalBeatable; i++)
-            rndNums[i] = UnityEngine.Random.Range(5, 95);
+        for (int i = 0; i < totalBeatable - 1; i++)
+            rndNums[i] = UnityEngine.Random.Range(0, levelMax);
 
         // Sort the array in ascending order.
         Array.Sort(rndNums);
@@ -175,7 +175,11 @@ public class LevelCreator : MonoBehaviour
         for (int i = 1; i < totalBeatable - 1; i++)
             rndSumToMax[i] = rndNums[i] - rndNums[i - 1];
 
-        rndSumToMax[totalBeatable - 1] = levelMax - rndSumToMax[totalBeatable - 2];
+        rndSumToMax[totalBeatable - 1] = levelMax - rndNums[totalBeatable - 2];
+
+        int sum = 0;
+        rndSumToMax.ToList().ForEach(n => sum += n);
+        print($"sum:{sum}, max: {levelMax}");
 
         List<Enemy> unSelectedBeatableEnemies = new List<Enemy>(presetBeatableEnemies);
         List<Enemy> unSelectedRandom = new List<Enemy>(presetRandomEnemies);

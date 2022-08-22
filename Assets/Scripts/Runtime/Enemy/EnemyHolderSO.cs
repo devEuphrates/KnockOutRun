@@ -12,8 +12,8 @@ public class EnemyHolderSO : ScriptableObject
 
     public void AddEnemy(Enemy enemy)
     {
-        OnEnemyAdded.Invoke(enemy);
         _sceneEnemies.Add(enemy);
+        OnEnemyAdded.Invoke(enemy);
     }
 
     public void RemoveEnemy(Enemy enemy)
@@ -22,8 +22,8 @@ public class EnemyHolderSO : ScriptableObject
 
         if (!cehck)
             return;
-        
-        Enemies.Remove(enemy);
+
+        _sceneEnemies.Remove(enemy);
         OnEnemyRemoved.Invoke(enemy);
     }
 }
