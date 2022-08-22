@@ -6,11 +6,26 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     [Header("Strength")]
-    [SerializeField] float _strengthDifference;
+    public EnemyType EnemyPresetType = EnemyType.Random;
+
+    float _strengthChange;
+    public float StrengthChange
+    {
+        get => _strengthChange;
+        set
+        {
+            if (value >= 0)
+                _strengthChange = Mathf.Clamp(value, 5f, float.MaxValue);
+            else
+                _strengthChange = value;
+        }
+    }
+
     public event Action OnStrengthSet;
     float _strength = 0f;
-    public float Strength { get { return _strength; } }
+    public float Strength { get => _strength; }
     [Space]
+    [SerializeReference] EnemyHolderSO _enemyHolder;
     [SerializeReference] UnityEventTriggerCollider _trigger;
     [SerializeReference] FloatSO _playerStrength;
     [SerializeReference] IntSO _coin;
@@ -28,6 +43,7 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
+        _enemyHolder.AddEnemy(this);
         _trigger.OnEnter.AddListener(Fight);
         _enemyHit.AddListener(LoseFight);
         _playerFail.AddListener(OnFinish);
@@ -35,6 +51,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
+        _enemyHolder.RemoveEnemy(this);
         _trigger.OnEnter.RemoveListener(Fight);
         _enemyHit.RemoveListener(LoseFight);
         _playerFail.RemoveListener(OnFinish);
@@ -51,12 +68,11 @@ public class Enemy : MonoBehaviour
         if (lost)
         {
             _playerPunch.Invoke(this);
-            _playerStrength.Value += Mathf.Floor(_strength);
+            _playerStrength.Value += _strength;
             return;
         }
 
-        _playerStrength.Value += change;
-
+        _playerStrength.Value += _strengthChange;
         _anim.Punch();
     }
 
@@ -83,7 +99,19 @@ public class Enemy : MonoBehaviour
 
     public void SetStrength(GameObject _)
     {
-        _strength = Mathf.Clamp(_playerStrength.Value + _strengthDifference, 5f, float.MaxValue);
+        if (_strengthChange < 0)
+        {
+            _strength = _playerStrength - _strengthChange;
+            OnStrengthSet?.Invoke();
+            return;
+        }
+
+        _strength = _playerStrength > _strengthChange ?
+            _strengthChange
+            : Mathf.CeilToInt(Mathf.Clamp(_playerStrength - 5, 1, float.MaxValue));
+
         OnStrengthSet?.Invoke();
     }
 }
+
+public enum EnemyType { Random, GiveStrength, RemoveStrength}

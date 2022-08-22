@@ -696,7 +696,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476494609648207842}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 35.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426bfd941c9d95449adbea34c03fd38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _strengthDifference: 0
+  _enemyHolder: {fileID: 11400000, guid: a76d22415f2f11a479b8c79953b6b59f, type: 2}
   _trigger: {fileID: 1476494610356816139}
   _playerStrength: {fileID: 11400000, guid: ba4ec93c7f0c8f34eb55493e2b187418, type: 2}
   _coin: {fileID: 11400000, guid: 6f58804a93cee4c448752695a789ef6a, type: 2}
@@ -883,8 +883,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2.5, z: 3}
-  m_Center: {x: 0, y: 1.25, z: 3.5}
+  m_Size: {x: 1.5, y: 2.5, z: 5.3049026}
+  m_Center: {x: 0, y: 1.25, z: 2.3475487}
 --- !u!1 &1580069824843366089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,8 +2124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6576345887399890874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.503, y: 9.503, z: 9.503}
+  m_LocalPosition: {x: 0, y: 0, z: 30.5}
+  m_LocalScale: {x: 47.249866, y: 9.503, z: 9.503}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1476494609648207845}

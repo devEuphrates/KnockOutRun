@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         if (float.IsNaN(moveX))
             return;
 
-        float targetX = Mathf.Clamp(_target.position.x + moveX * 0.002f, _minX, _maxX);
+        float targetX = Mathf.Clamp(_target.position.x + moveX * 0.003f, _minX, _maxX);
         _target.position = new Vector3(targetX, 0f, 0f);
     }
 

@@ -8,7 +8,7 @@ namespace Euphrates
 	{
 		protected virtual T Subtract(T x, T y)
         {
-			T result = default(T);
+			T result = default;
 			return result;
         }
 

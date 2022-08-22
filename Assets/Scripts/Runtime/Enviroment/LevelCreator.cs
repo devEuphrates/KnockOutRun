@@ -1,4 +1,5 @@
 using Euphrates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,6 +23,12 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] float _multiplierSize = 1f;
     [SerializeField] float _multiplierMax = 10f;
     [SerializeField] float _multiplierStep = .1f;
+
+    [Header("Enemies"), Space]
+    [SerializeReference] EnemyHolderSO _enemyHolder;
+    [SerializeReference] IntSO _baseMaxLevel;
+    [SerializeReference] IntSO _maxLevelStep;
+
 
     void OnEnable() => _generateLevel.AddListener(SetLevel);
     void OnDisable() => _generateLevel.RemoveListener(SetLevel);
@@ -80,6 +87,8 @@ public class LevelCreator : MonoBehaviour
         GameObject go = Instantiate(level.LevelPrefab, transform);
         _endPiece.position = new Vector3(0f, 0f, level.ZEnd);
 
+        SetEnemyLevels();
+
         _levelGenerated.Invoke();
     }
 
@@ -128,6 +137,67 @@ public class LevelCreator : MonoBehaviour
         // Set the end boss position to the most end.
         _endPiece.position = Vector3.forward * curZ;
 
+        // Set Enemy levels have sum of max.
+        SetEnemyLevels();
+
         _levelGenerated.Invoke();
+    }
+
+    void SetEnemyLevels()
+    {
+        if (_enemyHolder.Enemies.Count < 2)
+            return;
+
+        int levelMax = _baseMaxLevel + _maxLevelStep * _currentLevel;
+        int minBeatableEnemyCount = Mathf.CeilToInt(_enemyHolder.Enemies.Count * 0.6f);
+
+        List<Enemy> presetRandomEnemies = _enemyHolder.Enemies.FindAll(e => e.EnemyPresetType == EnemyType.Random);
+        List<Enemy> presetBeatableEnemies = _enemyHolder.Enemies.FindAll(e => e.EnemyPresetType == EnemyType.GiveStrength);
+
+        int totalBeatable = Mathf.CeilToInt(_enemyHolder.Enemies.Count * 0.6f);
+        totalBeatable = totalBeatable > presetBeatableEnemies.Count ? totalBeatable : presetBeatableEnemies.Count;
+
+        // Create int array of size of enemies we can beat.
+        int[] rndNums = new int[totalBeatable];
+
+        // Randomly populate the array.
+        for (int i = 0; i < totalBeatable; i++)
+            rndNums[i] = UnityEngine.Random.Range(5, 95);
+
+        // Sort the array in ascending order.
+        Array.Sort(rndNums);
+
+        // Create the array that will hold the real values.
+        int[] rndSumToMax = new int[totalBeatable];
+
+        rndSumToMax[0] = rndNums[0];
+
+        for (int i = 1; i < totalBeatable - 1; i++)
+            rndSumToMax[i] = rndNums[i] - rndNums[i - 1];
+
+        rndSumToMax[totalBeatable - 1] = levelMax - rndSumToMax[totalBeatable - 2];
+
+        List<Enemy> unSelectedBeatableEnemies = new List<Enemy>(presetBeatableEnemies);
+        List<Enemy> unSelectedRandom = new List<Enemy>(presetRandomEnemies);
+
+        int randomBeatable = totalBeatable > presetBeatableEnemies.Count ? totalBeatable - presetBeatableEnemies.Count : 0;
+        for (int i = 0; i < randomBeatable; i++)
+        {
+            Enemy sel = unSelectedRandom.GetRandomItem();
+            unSelectedRandom.Remove(sel);
+            unSelectedBeatableEnemies.Add(sel);
+        }
+
+        List<int> randomUnbeatable = new List<int>() {100, 110, 120, 130, 140, 150, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300 };
+        foreach (var enemy in _enemyHolder.Enemies)
+            enemy.StrengthChange = randomUnbeatable.GetRandomItem() * -1f;
+
+        for (int i = 0; i < totalBeatable; i++)
+        {
+            Enemy sel = unSelectedBeatableEnemies.GetRandomItem();
+            unSelectedBeatableEnemies.Remove(sel);
+
+            sel.StrengthChange = rndSumToMax[i];
+        }
     }
 }

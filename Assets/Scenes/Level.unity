@@ -3114,6 +3114,9 @@ MonoBehaviour:
   _multiplierSize: 15
   _multiplierMax: 50
   _multiplierStep: 0.2
+  _enemyHolder: {fileID: 11400000, guid: a76d22415f2f11a479b8c79953b6b59f, type: 2}
+  _baseMaxLevel: {fileID: 11400000, guid: e29762af50c1cc749b2b3fbcfc2bc542, type: 2}
+  _maxLevelStep: {fileID: 11400000, guid: aeca137bfcefcd444bca12cf29a314e8, type: 2}
 --- !u!4 &2114328910
 Transform:
   m_ObjectHideFlags: 0
