@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06811f770f143d34984eb3a21d90a1eb, type: 3}
   m_Name: FY 2
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 4479884467887258417, guid: 5189501a0d69a0d44bc914bc2b7a1922, type: 3}
+  Prefab: {fileID: 4479884467887258417, guid: c4fbb13ec7481ae4185034f2a7d936cc, type: 3}
   ZScale: 120
   MinLevel: 0
   MaxLevel: -1
