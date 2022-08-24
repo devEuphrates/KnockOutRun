@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
         set
         {
             if (value >= 0)
-                _strengthChange = Mathf.Clamp(value, 5f, float.MaxValue);
+                _strengthChange = Mathf.Clamp(value, 1f, float.MaxValue);
             else
                 _strengthChange = value;
         }
@@ -28,10 +28,12 @@ public class Enemy : MonoBehaviour
     [SerializeReference] EnemyHolderSO _enemyHolder;
     [SerializeReference] UnityEventTriggerCollider _trigger;
     [SerializeReference] FloatSO _playerStrength;
+    [SerializeReference] FloatSO _missingPoints;
     [SerializeReference] IntSO _coin;
     [SerializeReference] CharacterAnimationControls _anim;
     [SerializeReference] RagdollEnabler _ragdoll;
     [SerializeReference] Rigidbody _rb;
+    [SerializeReference] Vector3SO _throw;
     public UnityEvent OnDefeat;
 
     [Header("Channels"), Space]
@@ -76,7 +78,7 @@ public class Enemy : MonoBehaviour
         }
 
         _playerStrength.Value += change;
-        _anim.Punch();
+        _anim.PunchRand();
     }
 
     void LoseFight(Enemy enemy)
@@ -89,8 +91,7 @@ public class Enemy : MonoBehaviour
 
         _coin.Value++;
 
-        float randX = UnityEngine.Random.Range(-5f, -3f);
-        _rb.AddForce(new Vector3(randX, 2f, 1f) * 20f, ForceMode.Impulse);
+        _rb.AddForce(_throw.Value, ForceMode.Impulse);
 
         OnDefeat?.Invoke();
     }
@@ -109,12 +110,35 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        _strength = _playerStrength > _strengthChange ?
-            _strengthChange
-            : Mathf.CeilToInt(Mathf.Clamp(_playerStrength - 5, 1, float.MaxValue));
+        if (_playerStrength > _strengthChange)
+        {
+            if (_missingPoints == 0)
+            {
+                _strength = _strengthChange;
+                OnStrengthSet?.Invoke();
+                return;
+            }
 
+            float availableAmt = _playerStrength - _strengthChange - 1f;
+
+            float max = availableAmt > _missingPoints ? _missingPoints : availableAmt;
+
+            float added = availableAmt == 0 ? 0 : UnityEngine.Random.Range(1, Mathf.RoundToInt(max));
+            float totalChange = _strengthChange + added;
+
+            _missingPoints.Value = Mathf.Clamp(_missingPoints - totalChange, 0f, float.MaxValue);
+
+
+            _strength = _strengthChange + added;
+            OnStrengthSet?.Invoke();
+            return;
+        }
+
+        float missing = _strengthChange - _playerStrength - 1f;
+        _strength = Mathf.Clamp(_playerStrength - 1f, 1f, float.MaxValue);
+        _missingPoints.Value += missing;
         OnStrengthSet?.Invoke();
     }
 }
 
-public enum EnemyType { Random, GiveStrength, RemoveStrength}
+public enum EnemyType { Random, GiveStrength, RemoveStrength }

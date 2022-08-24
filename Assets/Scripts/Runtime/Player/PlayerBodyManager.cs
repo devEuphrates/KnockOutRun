@@ -24,12 +24,6 @@ public class PlayerBodyManager : MonoBehaviour
         _strength.OnChange -= SetBody;
     }
 
-    void Awake()
-    {
-        _strength.Value = 30;
-        SetBody(0f);
-    }
-
     void SetBody(float _)
     {
         SetMuscle();

@@ -16,7 +16,7 @@ namespace Euphrates
             return rval;
         }
 
-        protected override float Subtract(float x, float y) => x - y;
+        protected override float SubtractInternal(float x, float y) => x - y;
 
         public static FloatSO operator +(FloatSO var1, FloatSO var2) => DoOp(() => var1.Value + var2.Value);
         public static FloatSO operator +(FloatSO var1, int var2) => DoOp(() => var1.Value + var2);
@@ -40,5 +40,9 @@ namespace Euphrates
             rval.Value = op.Invoke();
             return rval;
         }
+
+        public void Add(int amt) => Value += amt;
+
+        public void SetTo(FloatSO var) => Value = var.Value;
     }
 }

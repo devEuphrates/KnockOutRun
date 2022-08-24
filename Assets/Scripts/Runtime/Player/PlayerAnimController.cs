@@ -55,6 +55,9 @@ public class PlayerAnimController : CharacterAnimationControls
     Enemy _selEnemy = null;
     void PunchEnemy(Enemy enemy)
     {
+        if (_selEnemy != null)
+            EnemyHit();
+
         _selEnemy = enemy;
         base.Punch();
     }
@@ -66,6 +69,7 @@ public class PlayerAnimController : CharacterAnimationControls
             return;
 
         _enemyHit?.Invoke(_selEnemy);
+        _selEnemy = null;
     }
 
     void Finisher()

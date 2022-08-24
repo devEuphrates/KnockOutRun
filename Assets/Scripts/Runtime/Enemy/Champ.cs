@@ -8,7 +8,7 @@ public class Champ : MonoBehaviour
 
     public void Throw()
     {
-        SetChildRbVelocity(transform, new Vector3(0f, 20f, _strength * .25f + _force));
+        SetChildRbVelocity(transform, new Vector3(0f, 20f, (_strength * .5f) + (_force * .5f)));
         SoundManager.Play("hit", 0, true, 1f);
     }
 

@@ -594,6 +594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Multiplier End
       objectReference: {fileID: 0}
+    - target: {fileID: 5147110204443275558, guid: a1383a95e93b2f84bb9e9b2e5e2c559b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5147110204443275992, guid: a1383a95e93b2f84bb9e9b2e5e2c559b, type: 3}
       propertyPath: m_RootOrder
       value: 11
