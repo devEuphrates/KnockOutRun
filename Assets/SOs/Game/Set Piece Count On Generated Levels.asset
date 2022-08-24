@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4c455a015d6804684b3b3408319ee6, type: 3}
   m_Name: Set Piece Count On Generated Levels
   m_EditorClassIdentifier: 
-  _value: 10
+  _value: 7

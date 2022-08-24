@@ -31,6 +31,18 @@ public class SoundManager : Singleton<SoundManager>
             src.Play();
         }
     }
+
+    public static void Play(AudioClip clip, int channel, bool randomize, float pitchMid = 1f, float _randRange = 0.2f, float volume = 1f)
+    {
+        channel = channel < Instance._channels.Count ? channel : Instance._channels.Count - 1;
+        AudioSource src = Instance._channels[channel];
+        src.clip = clip;
+
+        float pitch = randomize ? Random.Range(pitchMid - _randRange, pitchMid + _randRange) : 1f;
+        src.pitch = pitch;
+        src.volume = volume;
+        src.Play();
+    }
 }
 
 [System.Serializable]

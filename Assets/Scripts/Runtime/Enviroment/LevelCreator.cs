@@ -9,7 +9,6 @@ public class LevelCreator : MonoBehaviour
     [SerializeReference] IntSO _currentLevel;
     [SerializeReference] LevelsDataSO _levelsData;
     [SerializeReference] Transform _endPiece;
-    [SerializeReference] IntSO _setPieceCount;
     [SerializeField] float _startOffset = 0f;
 
     [Header("Triggers"), Space]
@@ -26,9 +25,15 @@ public class LevelCreator : MonoBehaviour
 
     [Header("Enemies"), Space]
     [SerializeReference] EnemyHolderSO _enemyHolder;
+    [SerializeReference] IntSO _minEnemyCount;
     [SerializeReference] IntSO _baseMaxLevel;
     [SerializeReference] IntSO _maxLevelStep;
+    [SerializeReference] FloatSO _beatablePercent;
 
+    [Header("Enviroment"), Space]
+    [SerializeReference] FloatSO _minLength;
+    [SerializeReference] FloatSO _maxLength;
+    [SerializeReference] FloatSO _lengthStep;
 
     void OnEnable() => _generateLevel.AddListener(SetLevel);
     void OnDisable() => _generateLevel.RemoveListener(SetLevel);
@@ -85,7 +90,8 @@ public class LevelCreator : MonoBehaviour
     void GeneratePremadeLevel(PremadeLevel level)
     {
         GameObject go = Instantiate(level.LevelPrefab, transform);
-        _endPiece.position = new Vector3(0f, 0f, level.ZEnd);
+        go.transform.position = _startOffset * Vector3.forward;
+        _endPiece.position = new Vector3(0f, 0f, level.ZEnd + _startOffset);
 
         SetEnemyLevels();
 
@@ -100,7 +106,7 @@ public class LevelCreator : MonoBehaviour
         {
             int maxLevel = sp.MaxLevel < 0 ? int.MaxValue : sp.MaxLevel;
 
-            if (sp.MinLevel < _currentLevel && maxLevel > _currentLevel)
+            if (sp.MinLevel <= _currentLevel && maxLevel >= _currentLevel)
                 usableSetPieces.Add(sp);
         }
 
@@ -111,8 +117,11 @@ public class LevelCreator : MonoBehaviour
 
         // This iscreated to make sure to not to spawn same set pieces before going through all set pieces.
         var unUsed = new List<SetPieceSO>(usableSetPieces);
+        float len = 0f;
 
-        for (int i = 0; i < _setPieceCount; i++)
+        float curLen = Mathf.Clamp(_minLength + _lengthStep * (_currentLevel - 1), _minLength, _maxLength);
+
+        while (len < curLen)
         {
             // Reset the unused list if we went through all the set pieces.
             if (unUsed.Count == 0)
@@ -132,6 +141,7 @@ public class LevelCreator : MonoBehaviour
 
             // Increment current z position with the size of spawned set piece.
             curZ += sel.ZScale;
+            len += sel.ZScale;
         }
 
         // Set the end boss position to the most end.
@@ -154,7 +164,7 @@ public class LevelCreator : MonoBehaviour
         List<Enemy> presetRandomEnemies = _enemyHolder.Enemies.FindAll(e => e.EnemyPresetType == EnemyType.Random);
         List<Enemy> presetBeatableEnemies = _enemyHolder.Enemies.FindAll(e => e.EnemyPresetType == EnemyType.GiveStrength);
 
-        int totalBeatable = Mathf.CeilToInt(_enemyHolder.Enemies.Count * 0.6f);
+        int totalBeatable = Mathf.CeilToInt(_enemyHolder.Enemies.Count * _beatablePercent);
         totalBeatable = totalBeatable > presetBeatableEnemies.Count ? totalBeatable : presetBeatableEnemies.Count;
 
         // Create int array of size of enemies we can beat.
@@ -179,7 +189,6 @@ public class LevelCreator : MonoBehaviour
 
         int sum = 0;
         rndSumToMax.ToList().ForEach(n => sum += n);
-        print($"sum:{sum}, max: {levelMax}");
 
         List<Enemy> unSelectedBeatableEnemies = new List<Enemy>(presetBeatableEnemies);
         List<Enemy> unSelectedRandom = new List<Enemy>(presetRandomEnemies);
@@ -192,9 +201,8 @@ public class LevelCreator : MonoBehaviour
             unSelectedBeatableEnemies.Add(sel);
         }
 
-        List<int> randomUnbeatable = new List<int>() {100, 110, 120, 130, 140, 150, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300 };
         foreach (var enemy in _enemyHolder.Enemies)
-            enemy.StrengthChange = randomUnbeatable.GetRandomItem() * -1f;
+            enemy.StrengthChange = UnityEngine.Random.Range(5, 31) * -10f;
 
         for (int i = 0; i < totalBeatable; i++)
         {

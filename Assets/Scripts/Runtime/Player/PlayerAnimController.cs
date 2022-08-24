@@ -14,10 +14,14 @@ public class PlayerAnimController : CharacterAnimationControls
     [SerializeReference] EnemyChannelSO _punchTrigger;
     [SerializeReference] EnemyChannelSO _enemyHit;
     [SerializeReference] TriggerChannelSO _failTrigger;
+    [SerializeReference] TriggerChannelSO _startTrigger;
     [SerializeReference] TriggerChannelSO _finishPunchTrigger;
+
+    bool _started = false;
 
     private void OnEnable()
     {
+        _startTrigger.AddListener(OnStart);
         _strength.OnChange += OnDamage;
         _punchTrigger.OnTrigger += PunchEnemy;
         _finishPunchTrigger.AddListener(Finisher);
@@ -26,15 +30,18 @@ public class PlayerAnimController : CharacterAnimationControls
 
     private void OnDisable()
     {
+        _startTrigger.RemoveListener(OnStart);
         _strength.OnChange -= OnDamage;
         _punchTrigger.OnTrigger -= PunchEnemy;
         _finishPunchTrigger.RemoveListener(Finisher);
         _failTrigger.RemoveListener(Fail);
     }
 
+    void OnStart() => _started = true;
+
     void OnDamage(float change)
     {
-        if (change > 0f)
+        if (!_started || change > 0f)
             return;
 
         if (_strength <= 0f)

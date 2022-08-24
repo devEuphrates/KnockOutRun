@@ -33,7 +33,10 @@ public class EnemyStrengthIndicator : MonoBehaviour
 
     void Show()
     {
+        if (_cg == null)
+            return;
+
         _text.text = _enemy.Strength.ToString();
-        Tween.Lerp(0, 1, _duration, (object val) => _cg.alpha = (float)val);
+        Tween.Lerp(0, 1, _duration, (object val) => { if (_cg != null) _cg.alpha = (float)val; });
     }
 }

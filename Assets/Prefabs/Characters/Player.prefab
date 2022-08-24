@@ -1202,6 +1202,7 @@ MonoBehaviour:
   _punchTrigger: {fileID: 11400000, guid: 5877621ae980c674dbb581798e776bb5, type: 2}
   _enemyHit: {fileID: 11400000, guid: 37ffaf47cab7a8241b985d909a8ea97c, type: 2}
   _failTrigger: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+  _startTrigger: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
   _finishPunchTrigger: {fileID: 11400000, guid: c90e5d74645c97b448bcb083d0c77e78, type: 2}
 --- !u!114 &2191300989115611386
 MonoBehaviour:
@@ -2850,7 +2851,19 @@ MonoBehaviour:
         m_CallState: 2
   _trigger4:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b965d1cbea49313428a19035c2a5b617, type: 2}
+        m_TargetAssemblyTypeName: SoundPlayChannelSO, Resin
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _trigger5:
     m_PersistentCalls:
       m_Calls: []

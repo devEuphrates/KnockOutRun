@@ -37,7 +37,7 @@ public class EnemyMuscleManager : MonoBehaviour
         {
             _mesh.SetBlendShapeWeight(0, 0);
             Tween.Lerp(_mesh.GetBlendShapeWeight(1), (50f - amount) * 2f, .5f,
-                (object val) => _mesh.SetBlendShapeWeight(1, (float)val));
+                (object val) => { if (_mesh != null) _mesh.SetBlendShapeWeight(1, (float)val); });
             //_mesh.SetBlendShapeWeight(1, (50f - amount) * 2f);
             return;
         }
@@ -47,7 +47,7 @@ public class EnemyMuscleManager : MonoBehaviour
 
         _mesh.SetBlendShapeWeight(1, 0);
         Tween.Lerp(_mesh.GetBlendShapeWeight(0), newAmt, .5f,
-                (object val) => _mesh.SetBlendShapeWeight(0, (float)val));
+                (object val) => { if (_mesh != null) _mesh.SetBlendShapeWeight(0, (float)val); });
         _mesh.SetBlendShapeWeight(0, newAmt);
     }
 
@@ -58,6 +58,9 @@ public class EnemyMuscleManager : MonoBehaviour
 
         void StepFunc(object val)
         {
+            if (_scaled == null)
+                return;
+
             Vector3 newScale = Vector3.one * (float)val;
             _scaled.localScale = newScale;
         }

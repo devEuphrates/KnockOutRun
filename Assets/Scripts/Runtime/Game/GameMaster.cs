@@ -6,28 +6,47 @@ public class GameMaster : MonoBehaviour
 {
     [SerializeReference] IntSO _currentLevel;
 
-    [Header("Triggers and Channels")]
+    [Header("Validation"), Space]
+    [SerializeReference] TriggerChannelSO _validated;
+
+    [Header("Triggers and Channels"), Space]
     [SerializeReference] SaveChannelSO _save;
     [SerializeReference] TriggerChannelSO _setLevel;
     [SerializeReference] TriggerChannelSO _levelGenerated;
+    [SerializeReference] TriggerChannelSO _restartLevel;
     [SerializeReference] TriggerChannelSO _nextLevel;
 
     [Header("UI"), Space]
     [SerializeReference] GameObject _loadingScreen;
+    
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     private void OnEnable()
     {
+        _validated.AddListener(VersionValidated);
+
         _levelGenerated.AddListener(LevelReady);
+        _restartLevel.AddListener(LoadCurrentLevel);
         _nextLevel.AddListener(LoadNexLevel);
     }
 
     private void OnDisable()
     {
+        _validated.RemoveListener(VersionValidated);
+
         _levelGenerated.RemoveListener(LevelReady);
+        _restartLevel.RemoveListener(LoadCurrentLevel);
         _nextLevel.RemoveListener(LoadNexLevel);
     }
 
-    private void Start() => LoadLevel(null);
+    void VersionValidated()
+    {
+        _save.Load();
+        LoadLevel(null);
+    }
 
 
     #region Load / Unload Cycle
@@ -51,11 +70,17 @@ public class GameMaster : MonoBehaviour
 
     void LoadNexLevel()
     {
+        _currentLevel.Value++;
+        _save.Save();
+        LoadCurrentLevel();
+    }
+
+    void LoadCurrentLevel()
+    {
         // Enable loading screen
         _loadingScreen.SetActive(true);
 
         // Increment current level and start loading processs
-        _currentLevel.Value++;
         AsyncOperation op = SceneManager.UnloadSceneAsync(1);
         op.completed += LoadLevel;
     }

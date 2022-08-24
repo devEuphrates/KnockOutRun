@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4427529878648474972}
   m_Father: {fileID: 0}
@@ -81,8 +82,8 @@ MonoBehaviour:
   OnTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
-        m_TargetAssemblyTypeName: TriggerChannelSO, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+        m_TargetAssemblyTypeName: TriggerChannelSO, Resin.Utils
         m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
@@ -92,18 +93,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
-        m_TargetAssemblyTypeName: TriggerChannelSO, Assembly-CSharp
-        m_MethodName: set_Silent
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!65 &864865373699182908
 BoxCollider:

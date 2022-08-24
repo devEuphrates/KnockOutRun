@@ -31,7 +31,7 @@ public class FailDetector : MonoBehaviour
             return;
 
         // If falling
-        if (_controller.velocity.y < -1f)
+        if (_controller.velocity.y < -.5f)
         {
             // Do nothing if we already started falling
             if (_startedFall)

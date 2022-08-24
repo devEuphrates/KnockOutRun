@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     [SerializeReference] TriggerChannelSO _playerFail;
 
     bool _finished = false;
+    bool _fought = false;
 
     private void OnEnable()
     {
@@ -59,8 +60,10 @@ public class Enemy : MonoBehaviour
 
     public void Fight(GameObject _)
     {
-        if (_finished)
+        if (_finished || _fought)
             return;
+
+        _fought = true;
 
         float change = _playerStrength.Value - _strength;
         bool lost = change > 0;
@@ -72,7 +75,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        _playerStrength.Value += _strengthChange;
+        _playerStrength.Value += change;
         _anim.Punch();
     }
 
