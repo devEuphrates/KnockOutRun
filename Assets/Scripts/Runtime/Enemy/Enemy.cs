@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [Header("Strength")]
     public EnemyType EnemyPresetType = EnemyType.Random;
 
-    float _strengthChange;
+    [SerializeField] float _strengthChange;
     public float StrengthChange
     {
         get => _strengthChange;
@@ -103,6 +103,9 @@ public class Enemy : MonoBehaviour
 
     public void SetStrength(GameObject _)
     {
+        if (_finished)
+            return;
+
         if (_strengthChange < 0)
         {
             _strength = _playerStrength - _strengthChange;

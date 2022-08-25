@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 4361036596949890155}
   - component: {fileID: 3961426364830535076}
   - component: {fileID: 6890286498556759780}
+  - component: {fileID: 5759584318917240056}
   m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
@@ -401,7 +402,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 6.59}
-  m_SizeDelta: {x: 200, y: 100}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4361036596949890155
 Canvas:
@@ -464,6 +465,35 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5759584318917240056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971496920281518527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listened: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+  _listenedEnemy: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 867878820453784929}
+        m_TargetAssemblyTypeName: UIItemHider, Resin.UI
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1057916365079808700
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +571,7 @@ GameObject:
   - component: {fileID: 986835996794402293}
   - component: {fileID: 9146463174083049397}
   - component: {fileID: 1906523831163607214}
+  - component: {fileID: 867878820453784929}
   m_Layer: 7
   m_Name: Strength
   m_TagString: Untagged
@@ -636,6 +667,22 @@ MonoBehaviour:
   _duration: 0.5
   _alphaAnim: {fileID: 0}
   _scaleAnim: {fileID: 0}
+--- !u!114 &867878820453784929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416021762544057847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679fc4d207ad9f74b85632089a24aeae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.5
+  OnEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1418218130830259604
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPresetType: 0
+  _strengthChange: 0
   _enemyHolder: {fileID: 11400000, guid: a76d22415f2f11a479b8c79953b6b59f, type: 2}
   _trigger: {fileID: 1476494610356816139}
   _playerStrength: {fileID: 11400000, guid: ba4ec93c7f0c8f34eb55493e2b187418, type: 2}

@@ -15,4 +15,4 @@ MonoBehaviour:
   Prefab: {fileID: 1613841961077200561, guid: bed81864b2216ef4ea88ea69fba04f15, type: 3}
   ZScale: 30
   MinLevel: 5
-  MaxLevel: -1
+  MaxLevel: 20

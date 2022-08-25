@@ -58,7 +58,7 @@ public class LevelCreator : MonoBehaviour
         GenerateRandomLevel();
     }
 
-    void GenerateMultipliers()
+    public void GenerateMultipliers()
     {
         if (_multiplierParent == null || _multiplierPrefab == null)
             return;
