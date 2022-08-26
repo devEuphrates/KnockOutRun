@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace Euphrates
 {
-    [CreateAssetMenu(fileName = "New Integer SO", menuName = "SO Variables/Integer SO")]
+    [CreateAssetMenu(fileName = "New Integer SO", menuName = "SO Variables/Integer")]
 	public class IntSO : SOVariable<int>
     {
-        protected override int Subtract(int x, int y) => x - y;
+        protected override int SubtractInternal(int x, int y) => x - y;
 
         public static implicit operator int(IntSO so) => so.Value;
         public static explicit operator IntSO(int value)
@@ -39,5 +39,9 @@ namespace Euphrates
             rval.Value = op.Invoke();
             return rval;
         }
+
+        public void Add(int amt) => Value += amt;
+
+        public void SetTo(IntSO var) => Value = var.Value;
     }
 }

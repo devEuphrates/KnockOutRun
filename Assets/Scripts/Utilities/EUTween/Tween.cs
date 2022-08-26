@@ -11,7 +11,7 @@ namespace Euphrates
         static bool _working;
 
         #region Lerp
-        public static void Lerp(float var, float endVal, float duration, Action<object> onStep = null, Action onFinish = null)
+        public static int Lerp(float var, float endVal, float duration, Action<object> onStep = null, Action onFinish = null)
         {
             object LerpFunc(TweenData<object> data, float time)
             {
@@ -21,6 +21,7 @@ namespace Euphrates
 
             TweenData<object> floatLerp = new TweenData<object>()
             {
+                ID = UnityEngine.Random.Range(100000, 999999),
                 From = var,
                 To = endVal,
                 Duration = duration,
@@ -34,12 +35,15 @@ namespace Euphrates
 
             if (!_working)
                 WorkTweens();
+
+            return floatLerp.ID;
         }
 
-        public static void Lerp(this Color var, Color endVal, float duration, Action<object> onStep = null, Action onFinish = null)
+        public static int Lerp(this Color var, Color endVal, float duration, Action<object> onStep = null, Action onFinish = null)
         {
-            TweenData<object> floatLerp = new TweenData<object>()
+            TweenData<object> colLerp = new TweenData<object>()
             {
+                ID = UnityEngine.Random.Range(100000, 999999),
                 From = var,
                 To = endVal,
                 Duration = duration,
@@ -49,7 +53,22 @@ namespace Euphrates
                 Operation = TweenOps.FloatLerp
             };
 
-            AddTween(floatLerp);
+            AddTween(colLerp);
+            return colLerp.ID;
+        }
+
+        public static bool StopTween(int ID)
+        {
+            foreach (var tw in _tweens)
+            {
+                if (tw.ID != ID)
+                    continue;
+
+                _tweens.Remove(tw);
+                return true;
+            }
+
+            return false;
         }
         #endregion
 
@@ -95,6 +114,7 @@ namespace Euphrates
 
 	public struct TweenData<T>
     {
+        public int ID;
         public object From;
         public object To;
 

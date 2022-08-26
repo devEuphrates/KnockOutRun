@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.699, z: 0}
   m_LocalScale: {x: 0.51074, y: 1.3879786, z: 2.9455}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3808308627887778773}
   m_RootOrder: 2
@@ -56,6 +57,7 @@ GameObject:
   - component: {fileID: 3808308627887778770}
   - component: {fileID: 1949602352}
   - component: {fileID: 1582596787759529185}
+  - component: {fileID: 4093379950427458795}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -73,6 +75,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3698420632357029657}
   - {fileID: 3792519675823260829}
@@ -136,8 +139,8 @@ MonoBehaviour:
   OnEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
-        m_TargetAssemblyTypeName: TriggerChannelSO, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+        m_TargetAssemblyTypeName: TriggerChannelSO, Resin.Utils
         m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
@@ -148,36 +151,106 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 7ef665df8768ad1429921f00ece58eae, type: 2}
-        m_TargetAssemblyTypeName: TriggerChannelSO, Assembly-CSharp
-        m_MethodName: set_Silent
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   OnExit:
     m_PersistentCalls:
       m_Calls: []
   _observedLayers: {fileID: 11400000, guid: 41ed148a7b1ac1a44b43f589df5feba9, type: 2}
---- !u!114 &3808308628259551823
-MonoBehaviour:
+--- !u!82 &4093379950427458795
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4042188837515795875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f44e292481bf564c92b6cf3aa0f1536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotateSpeed: 500
-  _axis: {x: 1, y: 0, z: 0}
+  m_GameObject: {fileID: 3808308627887778772}
+  m_Enabled: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7313369001826540462
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +279,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.005, z: 4}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3808308627887778773}
   m_RootOrder: 1
@@ -229,6 +303,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -328,13 +403,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf1753e1e2db031438824947c131ebd4, type: 3}
---- !u!1 &4042188837515795875 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bf1753e1e2db031438824947c131ebd4, type: 3}
-  m_PrefabInstance: {fileID: 3808308628337762546}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3698420632357029657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bf1753e1e2db031438824947c131ebd4, type: 3}
   m_PrefabInstance: {fileID: 3808308628337762546}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4042188837515795875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bf1753e1e2db031438824947c131ebd4, type: 3}
+  m_PrefabInstance: {fileID: 3808308628337762546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3808308628259551823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042188837515795875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f44e292481bf564c92b6cf3aa0f1536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateSpeed: 500
+  _axis: {x: 1, y: 0, z: 0}

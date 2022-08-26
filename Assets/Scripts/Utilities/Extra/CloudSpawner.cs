@@ -1,20 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Euphrates;
+using System.Threading.Tasks;
 
 public class CloudSpawner : MonoBehaviour
 {
-    readonly int MAX_ITERATION = 10000;
+    readonly int MAX_ITERATION = 1000000;
 
     [SerializeField] List<GameObject> _prefabs = new List<GameObject>();
-    List<GameObject> _clouds = new List<GameObject>();
-
     [Space]
     [SerializeField] List<CloudZone> _zones = new List<CloudZone>();
 
+    [SerializeField] bool _isWorking = false;
+
     public void Spawn()
     {
+        if (_isWorking)
+            return;
+
+        _isWorking = true;
+
         DeleteAll();
+        SpawnAsync();
+    }
+
+    async void SpawnAsync()
+    {
+        List<Vector3> usedPos = new List<Vector3>();
 
         foreach (var zone in _zones)
         {
@@ -25,41 +37,76 @@ public class CloudSpawner : MonoBehaviour
             Vector3 realMax = zone.Max();
 
             Vector3 lastPos = new Vector3(Random.Range(realMin.x, realMax.x), Random.Range(realMin.y, realMax.y), Random.Range(realMin.z, realMax.z));
+            usedPos.Add(lastPos);
             GameObject go = Instantiate(_prefabs.GetRandomItem(), transform);
             go.transform.position = lastPos;
-            _clouds.Add(go);
+            go.isStatic = true;
 
             for (int i = 1; i < zone.Count; i++)
             {
                 int j = 0;
                 while (j++ < MAX_ITERATION)
                 {
-                    float sep = Random.Range(minSep, maxSep);
-                    Vector3 dir = Random.insideUnitSphere;
+                    if (!_isWorking)
+                        return;
 
-                    Vector3 pos = lastPos + (dir * sep);
-                    if (!zone.InZone(pos))
+                    if (j % 10000 == 0)
+                        await Task.Yield();
+
+                    Vector3 pos = zone.GetRandomPoint();
+                    bool pass = false;
+
+                    foreach (var p in usedPos)
+                    {
+                        float dist = Vector3.Distance(p, pos);
+                        if (dist < minSep || dist > maxSep)
+                        {
+                            pass = true;
+                            break;
+                        }
+                    }
+
+                    if (pass)
                         continue;
 
-                    lastPos = pos;
-                    GameObject spawned = Instantiate(_prefabs.GetRandomItem(), transform);
+                    var spawned = Instantiate(_prefabs.GetRandomItem(), transform);
                     spawned.transform.position = pos;
-                    _clouds.Add(spawned);
+                    spawned.isStatic = true;
+                    usedPos.Add(pos);
                     break;
                 }
             }
         }
+
+        _isWorking = false;
     }
 
     public void DeleteAll()
     {
-        if (_clouds.Count < 1)
+        if (transform.childCount < 1)
             return;
 
-        for (int i = _clouds.Count - 1; i >= 0; i--)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            DestroyImmediate(_clouds[i]);
-            _clouds.RemoveAt(i);
+            DestroyImmediate(transform.GetChild(0).gameObject);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+
+        foreach (var zone in _zones)
+        {
+            Vector3 min = zone.Min();
+            Vector3 max = zone.Max();
+
+            Vector3 dir = max - min;
+            Vector3 center = min + (dir * 0.5f);
+
+            Vector3 size = new Vector3(max.x - min.x, max.y - min.y, max.z - min.z);
+
+            Gizmos.DrawWireCube(center, size);
         }
     }
 }
@@ -74,6 +121,15 @@ struct CloudZone
     public float MinSeperation;
     [Tooltip("Put -1 for no maximum")]
     public float MaxSeperation;
+
+    public CloudZone(int count, Vector3 corner1, Vector3 corner2, float minsep, float maxSep)
+    {
+        Count = count;
+        Corner1 = corner1;
+        Corner2 = corner2;
+        MinSeperation = minsep;
+        MaxSeperation = maxSep;
+    }
 
     public Vector3 Max()
     {

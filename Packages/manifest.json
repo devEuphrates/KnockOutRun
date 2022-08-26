@@ -3,6 +3,7 @@
     "com.ecasillas.missingrefsfinder": "https://github.com/edcasillas/unity-missing-references-finder.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.animation.rigging": "1.1.1",
+    "com.unity.burst": "1.7.4",
     "com.unity.cinemachine": "2.8.6",
     "com.unity.collab-proxy": "1.17.1",
     "com.unity.ide.rider": "3.0.15",
@@ -46,5 +47,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "Game Package Registry by Google",
+      "url": "https://unityregistry-pa.googleapis.com",
+      "scopes": [
+        "com.google"
+      ]
+    }
+  ]
 }

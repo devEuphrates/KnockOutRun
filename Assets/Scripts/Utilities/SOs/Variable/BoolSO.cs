@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Euphrates
 {
-    [CreateAssetMenu(fileName = "New Bool SO", menuName = "SO Variables/Bool SO")]
+    [CreateAssetMenu(fileName = "New Bool SO", menuName = "SO Variables/Bool")]
     public class BoolSO : SOVariable<bool>
 	{
         public BoolSO(bool val) => this.Value = val;

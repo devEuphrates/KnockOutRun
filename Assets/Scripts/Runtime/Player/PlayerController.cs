@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 60;
         _transform = transform;
         _controller = GetComponent<CharacterController>();
     }
@@ -83,7 +82,6 @@ public class PlayerController : MonoBehaviour
 
     void TouchDown(Vector2 pos)
     {
-        print(pos);
         if (!_controlActive)
             return;
 
@@ -92,21 +90,19 @@ public class PlayerController : MonoBehaviour
 
     void TouchMove(Vector2 pos)
     {
-        print(pos);
         if (!_controlActive)
             return;
 
-        if (Vector2.Distance(pos, _initialTouch) > _maxInputRadius)
-            _initialTouch = pos + (_initialTouch - pos).normalized * _maxInputRadius;
-
         Vector2 moveInput = pos - _initialTouch;
         float moveX = moveInput.x;
+        moveX *= 0.05f;
 
         if (float.IsNaN(moveX))
             return;
 
-        float targetX = Mathf.Clamp(_target.position.x + moveX * 0.002f, _minX, _maxX);
+        float targetX = Mathf.Clamp(_target.position.x + moveX, _minX, _maxX);
         _target.position = new Vector3(targetX, 0f, 0f);
+        _initialTouch = pos;
     }
 
     void Fail()

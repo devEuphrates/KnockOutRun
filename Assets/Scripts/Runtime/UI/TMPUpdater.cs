@@ -16,6 +16,7 @@ public class TMPUpdater : MonoBehaviour
         if (_floatValue != null)
         {
             _floatValue.OnChange += SetText;
+            SetText();
             return;
         }
 

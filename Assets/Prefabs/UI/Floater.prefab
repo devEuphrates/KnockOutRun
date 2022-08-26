@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7817467721397115696}
   - component: {fileID: 2515838703128245081}
   - component: {fileID: 1229524848708195292}
+  - component: {fileID: 8133811087358246008}
   m_Layer: 5
   m_Name: Floater
   m_TagString: Untagged
@@ -31,6 +32,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 339873399153115191}
   m_Father: {fileID: 0}
@@ -161,8 +163,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1432091398958463201}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1229524848708195292
 MonoBehaviour:
@@ -178,6 +180,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &8133811087358246008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432091398958463201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listened: {fileID: 11400000, guid: 2c29a6ff8a0b3794daa22b0640c202bb, type: 2}
+  _listenedEnemy: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2515838703128245081}
+        m_TargetAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
+        m_MethodName: set_alpha
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1960128864122689365
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +237,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3486324998709574304}
   m_RootOrder: 0

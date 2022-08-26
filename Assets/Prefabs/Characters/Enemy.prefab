@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 4361036596949890155}
   - component: {fileID: 3961426364830535076}
   - component: {fileID: 6890286498556759780}
+  - component: {fileID: 5759584318917240056}
   m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
@@ -401,7 +402,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 6.59}
-  m_SizeDelta: {x: 200, y: 100}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4361036596949890155
 Canvas:
@@ -464,6 +465,35 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5759584318917240056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971496920281518527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da108b07a0e3594fac84a242d8abae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listened: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+  _listenedEnemy: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 867878820453784929}
+        m_TargetAssemblyTypeName: UIItemHider, Resin.UI
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1057916365079808700
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +571,7 @@ GameObject:
   - component: {fileID: 986835996794402293}
   - component: {fileID: 9146463174083049397}
   - component: {fileID: 1906523831163607214}
+  - component: {fileID: 867878820453784929}
   m_Layer: 7
   m_Name: Strength
   m_TagString: Untagged
@@ -615,7 +646,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416021762544057847}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -636,6 +667,22 @@ MonoBehaviour:
   _duration: 0.5
   _alphaAnim: {fileID: 0}
   _scaleAnim: {fileID: 0}
+--- !u!114 &867878820453784929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416021762544057847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679fc4d207ad9f74b85632089a24aeae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.5
+  OnEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1418218130830259604
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,13 +743,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476494609648207842}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 35.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 294167880436056158}
   - {fileID: 2646393461123736765}
   - {fileID: 1476494610356816137}
+  - {fileID: 7105595727158368255}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -718,13 +766,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426bfd941c9d95449adbea34c03fd38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _strengthDifference: 0
+  EnemyPresetType: 0
+  _strengthChange: 0
+  _enemyHolder: {fileID: 11400000, guid: a76d22415f2f11a479b8c79953b6b59f, type: 2}
   _trigger: {fileID: 1476494610356816139}
   _playerStrength: {fileID: 11400000, guid: ba4ec93c7f0c8f34eb55493e2b187418, type: 2}
+  _missingPoints: {fileID: 11400000, guid: 308982ec1574f3c42b4abaa8d00a4ea1, type: 2}
   _coin: {fileID: 11400000, guid: 6f58804a93cee4c448752695a789ef6a, type: 2}
   _anim: {fileID: 1476494609648207847}
   _ragdoll: {fileID: 7077977601580735116}
   _rb: {fileID: 7207715217738871}
+  _throw: {fileID: 11400000, guid: 7b77b7071d4485f45ae92149a9a706b7, type: 2}
   OnDefeat:
     m_PersistentCalls:
       m_Calls: []
@@ -744,9 +796,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7077977601580735117}
-  _punchAnimations:
-  - hook_punch
+  _punchAnimTrigger: punch
+  _punchAnims:
   - punch
+  - hook_punch
   - right_hook
 --- !u!114 &1200182967
 MonoBehaviour:
@@ -882,8 +935,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2.5, z: 3}
-  m_Center: {x: 0, y: 1.25, z: 3.5}
+  m_Size: {x: 1.5, y: 2.5, z: 5.3049026}
+  m_Center: {x: 0, y: 1.25, z: 2.3475487}
 --- !u!1 &1580069824843366089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,6 +2150,83 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &6576345887399890874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7105595727158368255}
+  - component: {fileID: 8625880016171972351}
+  - component: {fileID: 4332733057125956758}
+  m_Layer: 0
+  m_Name: Str Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7105595727158368255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576345887399890874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 40}
+  m_LocalScale: {x: 50, y: 10, z: 80}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1476494609648207845}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8625880016171972351
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576345887399890874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4332733057125956758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576345887399890874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d6b5318b76c2044b21d689cf2c8355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1476494609648207844}
+        m_TargetAssemblyTypeName: Enemy, Resin
+        m_MethodName: SetStrength
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  _observedLayers: {fileID: 11400000, guid: 41ed148a7b1ac1a44b43f589df5feba9, type: 2}
 --- !u!1 &6762252882193684092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,6 +2302,7 @@ GameObject:
   - component: {fileID: 7077977601580735117}
   - component: {fileID: 7077977601580735116}
   - component: {fileID: 8792971167910253379}
+  - component: {fileID: 6100419763696072205}
   m_Layer: 7
   m_Name: Armature
   m_TagString: Untagged
@@ -2266,6 +2397,22 @@ MonoBehaviour:
   _trigger5:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6100419763696072205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077977601580735114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5367b9924e782e649aba7c2b0dfcd9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _throw: {fileID: 11400000, guid: 7b77b7071d4485f45ae92149a9a706b7, type: 2}
+  _firstValue: {x: 0, y: 0, z: 0}
+  _secondValue: {x: 0, y: 0, z: 0}
+  _thirdValue: {x: 0, y: 0, z: 0}
 --- !u!1 &7234342305968788798
 GameObject:
   m_ObjectHideFlags: 0

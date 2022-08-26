@@ -5,10 +5,12 @@ public class Champ : MonoBehaviour
 {
     [SerializeReference] FloatSO _strength;
     [SerializeReference] FloatSO _force;
+    [SerializeReference] FloatSO _maxVelocity;
 
     public void Throw()
     {
-        SetChildRbVelocity(transform, new Vector3(0f, 20f, _strength * .25f + _force));
+        float vel = Mathf.Clamp((_strength * .5f) + (_force * .5f), 0f, _maxVelocity);
+        SetChildRbVelocity(transform, new Vector3(0f, 20f, vel));
         SoundManager.Play("hit", 0, true, 1f);
     }
 

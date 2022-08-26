@@ -26,7 +26,6 @@ public class InputReaderSO : ScriptableObject, InputControls.IGameInputsActions
 
     public void OnTouchInput(InputAction.CallbackContext context)
     {
-        Debug.Log("touch");
         TouchState state = context.ReadValue<TouchState>();
 
         switch (state.phase)

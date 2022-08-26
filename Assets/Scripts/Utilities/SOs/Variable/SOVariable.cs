@@ -6,9 +6,9 @@ namespace Euphrates
 	[System.Serializable]
     public abstract class SOVariable<T> : ScriptableObject
 	{
-		protected virtual T Subtract(T x, T y)
+		protected virtual T SubtractInternal(T x, T y)
         {
-			T result = default(T);
+			T result = default;
 			return result;
         }
 
@@ -20,7 +20,7 @@ namespace Euphrates
 			}
 			set
 			{
-				T change = Subtract(value, _value);
+				T change = SubtractInternal(value, _value);
 				_value = value;
 				OnChange?.Invoke(change);
 			}
