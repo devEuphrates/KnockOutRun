@@ -1096,6 +1096,7 @@ GameObject:
   - component: {fileID: 6881017901452600701}
   - component: {fileID: 1207212291}
   - component: {fileID: 1199824752512209500}
+  - component: {fileID: 4444065751823012343}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -1313,6 +1314,23 @@ MonoBehaviour:
   _start: 0
   _failed: 0
   _startedFall: 0
+--- !u!114 &4444065751823012343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141769377756617549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec47f89da77a8c44d95c32f96cd3dcb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelLength: {fileID: 11400000, guid: 17b6bcf56e0fa644589bb7a602fa09e1, type: 2}
+  _progression: {fileID: 11400000, guid: 82154941225fd92419c81d42d25b2049, type: 2}
+  _gameStart: {fileID: 11400000, guid: 74742096ac4d5144c879aa533d8ee859, type: 2}
+  _gameEnd: {fileID: 11400000, guid: 88a133ad701566b4381bfa443d883374, type: 2}
+  _gameFail: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
 --- !u!1 &2179511165723674677
 GameObject:
   m_ObjectHideFlags: 0

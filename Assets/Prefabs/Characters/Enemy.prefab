@@ -801,7 +801,6 @@ MonoBehaviour:
   - punch
   - hook_punch
   - right_hook
-  - uppercut
 --- !u!114 &1200182967
 MonoBehaviour:
   m_ObjectHideFlags: 0
