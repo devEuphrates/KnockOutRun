@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Euphrates
 {
-    [CreateAssetMenu(fileName = "New 3D Animation Curve SO", menuName = "SO Variables/3D Animation Curve SO")]
+    [CreateAssetMenu(fileName = "New 3D Animation Curve SO", menuName = "SO Variables/3D Animation Curve")]
 	public class AnimationCurve3DSO : ScriptableObject
 	{
 		public AnimationCurve X;

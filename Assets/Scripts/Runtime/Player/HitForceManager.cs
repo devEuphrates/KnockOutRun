@@ -9,18 +9,24 @@ public class HitForceManager : MonoBehaviour
     [SerializeReference] FloatSO _forceAdd;
     [SerializeReference] EnemyChannelSO _hit;
     [SerializeReference] TriggerChannelSO _secondPhase;
+    [SerializeReference] TriggerChannelSO _fail;
+    [SerializeReference] TriggerChannelSO _end;
 
     void OnEnable()
     {
         _hit.AddListener(OnHit);
-        _secondPhase.AddListener(SecondPhase);
+        _secondPhase.AddListener(StopTimer);
+        _fail.AddListener(StopTimer);
+        _end.AddListener(StopTimer);
         _strength.OnChange += StrChange;
     }
 
     void OnDisable()
     {
         _hit.RemoveListener(OnHit);
-        _secondPhase.RemoveListener(SecondPhase);
+        _secondPhase.RemoveListener(StopTimer);
+        _fail.RemoveListener(StopTimer);
+        _end.RemoveListener(StopTimer);
         _strength.OnChange -= StrChange;
     }
 
@@ -38,10 +44,7 @@ public class HitForceManager : MonoBehaviour
         _force.Value = Mathf.Clamp(_force + change, 0f, _maxForce);
     }
 
-    void CreateReduceTimer()
-    {
-        GameTimer.CreateTimer("Force Reduce", 3600, CreateReduceTimer, ReduceTick);
-    }
+    void CreateReduceTimer() => GameTimer.CreateTimer("Force Reduce", 3600, CreateReduceTimer, ReduceTick);
 
     void ReduceTick(TickInfo tick)
     {
@@ -54,8 +57,5 @@ public class HitForceManager : MonoBehaviour
         _force.Value += _forceAdd;
     }
 
-    void SecondPhase()
-    {
-        GameTimer.CancleTimer("Force Reduce");
-    }
+    void StopTimer() => GameTimer.CancleTimer("Force Reduce");
 }

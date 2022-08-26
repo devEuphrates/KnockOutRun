@@ -8,7 +8,7 @@ public class LevelCreator : MonoBehaviour
 {
     [SerializeReference] IntSO _currentLevel;
     [SerializeReference] LevelsDataSO _levelsData;
-    [SerializeReference] Transform _endPiece;
+    [SerializeReference] GameObject _endPiecePrefab;
     [SerializeField] float _startOffset = 0f;
 
     [Header("Triggers"), Space]
@@ -16,7 +16,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeReference] TriggerChannelSO _levelGenerated;
 
     [Header("Multipliers"), Space]
-    [SerializeReference] Transform _multiplierParent;
+    Transform _multiplierParent;
     [SerializeReference] GameObject _multiplierPrefab;
     [SerializeReference] GameObject _multiplierEndPrefab;
     [SerializeField] float _multiplierSize = 1f;
@@ -34,6 +34,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeReference] FloatSO _minLength;
     [SerializeReference] FloatSO _maxLength;
     [SerializeReference] FloatSO _lengthStep;
+    [SerializeReference] FloatSO _currentLength;
 
     void OnEnable() => _generateLevel.AddListener(SetLevel);
     void OnDisable() => _generateLevel.RemoveListener(SetLevel);
@@ -91,16 +92,24 @@ public class LevelCreator : MonoBehaviour
     {
         GameObject go = Instantiate(level.LevelPrefab, transform);
         go.transform.position = _startOffset * Vector3.forward;
-        _endPiece.position = new Vector3(0f, 0f, level.ZEnd + _startOffset);
+
+        GameObject ep = Instantiate(_endPiecePrefab, transform);
+        ep.transform.position = new Vector3(0f, 0f, level.ZEnd + _startOffset);
+        _multiplierParent = ep.transform.GetChild(4);
 
         SetEnemyLevels();
 
+        _currentLength.Value = level.ZEnd + _startOffset;
+
+        StaticBatchingUtility.Combine(gameObject);
         _levelGenerated.Invoke();
     }
 
     void GenerateRandomLevel()
     {
         var usableSetPieces = new List<SetPieceSO>();
+
+        List<GameObject> statics = new List<GameObject>();
 
         foreach (var sp in _levelsData.SetPieces)
         {
@@ -131,6 +140,7 @@ public class LevelCreator : MonoBehaviour
             var sel = unUsed.GetRandomItem();
 
             var go = Instantiate(sel.Prefab, transform);
+            statics.AddRange(GetStaticChildren(go.transform));
 
             // Remove the spawned set piece from unused since it's recently used.
             unUsed.Remove(sel);
@@ -145,12 +155,32 @@ public class LevelCreator : MonoBehaviour
         }
 
         // Set the end boss position to the most end.
-        _endPiece.position = Vector3.forward * curZ;
+        GameObject ep = Instantiate(_endPiecePrefab, transform);
+        ep.transform.position = Vector3.forward * curZ;
+        _multiplierParent = ep.transform.GetChild(4);
+
+        _currentLength.Value = curZ;
 
         // Set Enemy levels have sum of max.
         SetEnemyLevels();
 
+        StaticBatchingUtility.Combine(statics.ToArray(), gameObject);
+
         _levelGenerated.Invoke();
+    }
+
+    List<GameObject> GetStaticChildren(Transform tr)
+    {
+        List<GameObject> st = new List<GameObject>();
+        foreach (Transform child in tr)
+        {
+            if (child.gameObject.isStatic)
+                st.Add(child.gameObject);
+
+            st.AddRange(GetStaticChildren(child));
+        }
+
+        return st;
     }
 
     void SetEnemyLevels()

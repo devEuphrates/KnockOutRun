@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Euphrates
 {
-    [CreateAssetMenu(fileName = "New Integer SO", menuName = "SO Variables/Integer SO")]
+    [CreateAssetMenu(fileName = "New Integer SO", menuName = "SO Variables/Integer")]
 	public class IntSO : SOVariable<int>
     {
         protected override int SubtractInternal(int x, int y) => x - y;

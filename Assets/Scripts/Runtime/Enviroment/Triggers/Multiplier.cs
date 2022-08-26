@@ -20,16 +20,7 @@ public class Multiplier : MonoBehaviour
 
     public void Init(float multiplier)
     {
-        float randR = Random.Range(0f, 1f);
-
-        Color randCol = Color.HSVToRGB(randR, 1, 1);
-        Init(multiplier, randCol);
-    }
-
-    public void Init(float multiplier, Color color)
-    {
         _multiplier = multiplier;
-        _mesh.materials[0].color = color;
         _text.text = $"x{_multiplier.ToString("0.##")}";
     }
 
@@ -52,8 +43,12 @@ public class Multiplier : MonoBehaviour
         if (_gameMultiplier < _multiplier)
             _gameMultiplier.Value = _multiplier;
 
-        var pos = transform.localPosition;
-        Tween.Lerp(pos.y, pos.y + 5f, 1f, (object val) => transform.localPosition = new Vector3(pos.x, (float) val, pos.z));
+        void Rise(object val)
+        {
+            transform.position = new Vector3(transform.position.x, (float)val, transform.position.z);
+        }
+
+        Tween.Lerp(transform.position.y, transform.position.y + 5f, 1f, Rise);
 
         _endGameTrigger.Invoke();
     }

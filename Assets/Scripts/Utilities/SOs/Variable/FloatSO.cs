@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Euphrates
 {
     [System.Serializable]
-    [CreateAssetMenu(fileName = "New Float SO", menuName = "SO Variables/Float SO")]
+    [CreateAssetMenu(fileName = "New Float SO", menuName = "SO Variables/Float")]
     public class FloatSO : SOVariable<float>
     {
 

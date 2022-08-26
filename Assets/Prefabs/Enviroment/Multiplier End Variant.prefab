@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &969029870
 Transform:
@@ -106,7 +106,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7312256119449948323, guid: 07087d3fe40e7854c90e8c57e02e97f7, type: 3}
       propertyPath: m_Name
-      value: Multiplier End
+      value: Multiplier End Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7312256119449949021, guid: 07087d3fe40e7854c90e8c57e02e97f7, type: 3}
       propertyPath: m_RootOrder

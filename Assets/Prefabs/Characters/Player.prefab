@@ -1134,7 +1134,7 @@ CharacterController:
   m_Height: 4
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 1
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2, z: 0}
@@ -1222,6 +1222,8 @@ MonoBehaviour:
   _forceAdd: {fileID: 11400000, guid: 3e44bcf74f08a854b8391167251f3be3, type: 2}
   _hit: {fileID: 11400000, guid: 37ffaf47cab7a8241b985d909a8ea97c, type: 2}
   _secondPhase: {fileID: 11400000, guid: e0d45d69e2a883c4b9e15edf1d6adfa0, type: 2}
+  _fail: {fileID: 11400000, guid: 2494ee78789d3594292299cd74a4fabd, type: 2}
+  _end: {fileID: 11400000, guid: 88a133ad701566b4381bfa443d883374, type: 2}
 --- !u!114 &6881017901452600701
 MonoBehaviour:
   m_ObjectHideFlags: 0
