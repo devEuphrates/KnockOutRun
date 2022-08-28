@@ -31,13 +31,14 @@ public class FailDetector : MonoBehaviour
             return;
 
         // If falling
-        if (_controller.velocity.y < -.5f)
+        if (_controller.velocity.y < -2f)
         {
             // Do nothing if we already started falling
             if (_startedFall)
                 return;
 
             // Start coyote timer
+            //_fail.Invoke();
             _startedFall = true;
             GameTimer.CreateTimer("Coyote Time", _coyoteTime, _fail.Invoke);
 

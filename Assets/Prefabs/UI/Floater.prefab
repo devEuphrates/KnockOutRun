@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 8079538713917443577}
   _group: {fileID: 2515838703128245081}
+  _setTrigger: {fileID: 11400000, guid: 1b082a3cd8856874b9e35f00a5c01ece, type: 2}
 --- !u!225 &2515838703128245081
 CanvasGroup:
   m_ObjectHideFlags: 0

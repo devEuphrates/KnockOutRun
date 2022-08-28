@@ -14,6 +14,9 @@ public class CoinUpdater : MonoBehaviour
 
     private void ShowChange(int change)
     {
+        if (change < 1)
+            return;
+
         Floater sel = _floaters[_indx];
 
         string str = change.ToString("+#;-#;0");
