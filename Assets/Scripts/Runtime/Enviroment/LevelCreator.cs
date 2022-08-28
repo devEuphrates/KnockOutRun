@@ -159,11 +159,13 @@ public class LevelCreator : MonoBehaviour
         ep.transform.position = Vector3.forward * curZ;
         _multiplierParent = ep.transform.GetChild(4);
 
+        statics.AddRange(GetStaticChildren(ep.transform));
+
         _currentLength.Value = curZ;
 
         // Set Enemy levels have sum of max.
         SetEnemyLevels();
-
+        statics.ForEach(s => s.gameObject.name = s.gameObject.name + " BATCHED");
         StaticBatchingUtility.Combine(statics.ToArray(), gameObject);
 
         _levelGenerated.Invoke();
@@ -172,13 +174,12 @@ public class LevelCreator : MonoBehaviour
     List<GameObject> GetStaticChildren(Transform tr)
     {
         List<GameObject> st = new List<GameObject>();
-        foreach (Transform child in tr)
-        {
-            if (child.gameObject.isStatic)
-                st.Add(child.gameObject);
 
+        if (tr.gameObject.isStatic)
+            st.Add(tr.gameObject);
+
+        foreach (Transform child in tr)
             st.AddRange(GetStaticChildren(child));
-        }
 
         return st;
     }

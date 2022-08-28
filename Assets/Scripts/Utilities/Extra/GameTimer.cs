@@ -10,6 +10,9 @@ namespace Euphrates
         static bool _isRunning = false;
         static readonly List<Timer> _timers = new List<Timer>();
 
+        static List<Timer> _toBeAdded = new List<Timer>();
+        static List<string> _toBeRemoved = new List<string>();
+
         public static void CreateTimer(string name, float duration, 
             Action onFinish = null, Action<TickInfo> onTick = null, Action onCancle = null, 
             bool useScaledTime = false)
@@ -24,11 +27,12 @@ namespace Euphrates
                 OnCancle = onCancle
             };
 
-            _timers.Add(timer);
+            _toBeAdded.Add(timer);
 
             if (!_isRunning)
                 RunTimers();
         }
+
 
         public static void CancleTimer(string name)
         {
@@ -41,7 +45,7 @@ namespace Euphrates
                 return;
 
             _timers[indx].OnCancle?.Invoke();
-            _timers.RemoveAt(indx);
+            _toBeRemoved.Add(name);
         }
 
         static async void RunTimers()
@@ -50,32 +54,44 @@ namespace Euphrates
             float last = Time.realtimeSinceStartup;
             float lastScaled = Time.time;
 
-            while (_timers.Count > 0)
+            while (_timers.Count > 0 || _toBeAdded.Count > 0)
             {
+                foreach (var tmr in _toBeAdded)
+                    _timers.Add(tmr);
+                _toBeAdded.Clear();
+
+                foreach (var nm in _toBeRemoved)
+                    _timers.RemoveAll(t => t.Name == nm);
+                _toBeRemoved.Clear();
+
                 float now = Time.realtimeSinceStartup;
                 float nowScaled = Time.time;
 
                 float deltaTime = now - last;
                 float deltaScaled = nowScaled - lastScaled;
 
-                for (int i = _timers.Count - 1; i > -1; i--)
+                foreach (var timer in _timers)
                 {
-                    float usedNow = (_timers[i].TimeScaled ? nowScaled : now);
-                    float usedDeltaTime = (_timers[i].TimeScaled ? deltaScaled : deltaTime);
+                    float usedNow = (timer.TimeScaled ? nowScaled : now);
+                    float usedDeltaTime = (timer.TimeScaled ? deltaScaled : deltaTime);
 
-                    if (_timers[i].End < usedNow)
+                    if (timer.End < usedNow)
                     {
-                        _timers[i].OnFinish?.Invoke();
-                        _timers.RemoveAt(i);
+                        _toBeRemoved.Add(timer.Name);
+                        timer.OnFinish?.Invoke();
                         continue;
                     }
 
-                    if (_timers[i].OnTick == null)
+                    if (timer.OnTick == null)
                         continue;
 
-                    var tInfo = new TickInfo(_timers[i].Name, _timers[i].Start, _timers[i].End, usedNow, usedDeltaTime);
-                    _timers[i].OnTick.Invoke(tInfo);
+                    var tInfo = new TickInfo(timer.Name, timer.Start, timer.End, usedNow, usedDeltaTime);
+                    timer.OnTick.Invoke(tInfo);
                 }
+
+                foreach (var nm in _toBeRemoved)
+                    _timers.RemoveAll(t => t.Name == nm);
+                _toBeRemoved.Clear();
 
                 last = Time.realtimeSinceStartup;
                 lastScaled = Time.time;
