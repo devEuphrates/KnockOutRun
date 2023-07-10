@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAppIndex: 0
   clientTokens:
-  - 1e071c08ce71cca07ea1723a08a15fcb
+  - 
   appIds:
-  - 467266822079037
+  - 
   appLabels:
   - Knock Out Run
   cookie: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: D:\Lurid Crow\Lurid Crow DEV\Projects\GAME\Unity\ResinSoft\user.keystore
+  androidKeystorePath: 
   iosURLSuffix: 
   appLinkSchemes:
   - list: []
